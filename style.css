@@ -13,12 +13,6 @@ body {
   height: 40px; 
 }
 
-/* .selected{
-  border: 2px solid red;
-} */
-
-/* colors */
-
 #color_1{
   background-color: black;
 }
@@ -40,4 +34,13 @@ body {
 
 .gridRow {
   margin: -4px;
+}
+
+#pixel-board{
+  position: relative;
+  margin-top:10px;
+}
+
+.tools{
+  display: inline-block;
 }

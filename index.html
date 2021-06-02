@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Project - Pixel Art</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,10 +16,16 @@
         </ul>
     </div>
     
-    <button id="clear-board">Limpar</button>
+    <button id="clear-board" class="tools">Limpar</button>
+
+    <form class="tools">
+        <label>Insira o tamanho da grid entre 1 e 50</label>
+        <input type="number" placeholder="(ex. 5)" id="board-size" min="1">
+        <button type="button" id="generate-board" onsubmit="return false">VQV</button>
+    </form>
 
     <div id="pixel-board"></div>
+
     <script src="script.js"></script>
-    
 </body>
 </html>

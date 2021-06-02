@@ -1,40 +1,42 @@
-// criar a quantidade de linhas da grid
-
 function createGrid(size) {
+  function createPixel() {
+    const pixel = document.createElement('li');
+    pixel.classList.add('pixel');
+    return pixel;
+  }
   function createRow() {
     const gridRow = document.createElement('ul');
-    gridRow.className = 'gridRow';
+    gridRow.classList.add('gridRow');
 
     for (let index = 0; index < size; index += 1) {
       gridRow.appendChild(createPixel());
     }
     document.querySelector('#pixel-board').appendChild(gridRow);
   }
-  function createPixel() {
-    const pixel = document.createElement('li');
-    pixel.className = 'pixel';
-    return pixel;
-  }
   for (let index = 0; index < size; index += 1) {
     createRow();
   }
 }
 
-// events
+function cleanGrid() {
+  const pixelBoard = document.querySelector('#pixel-board');
+  while (pixelBoard.firstChild) {
+    pixelBoard.removeChild(pixelBoard.firstChild);
+  }
+}
 
-document.addEventListener('click', (e) => {
-    const clicked = e.target;
-    if (clicked.className.includes('color') && !clicked.className.includes('selected')) {
-        let colorList = document.getElementsByClassName('color');
-        for(let index = 0; index < colorList.length; index += 1) {
-            if(colorList[index].className.includes('selected')) {
-                colorList[index].className = 'color';
-            }
-        }  
-        clicked.className += ' selected';
-    }
-});
 // events
+document.addEventListener('click', (e) => {
+  const clicked = e.target;
+  const colorList = document.getElementsByClassName('color');
+
+  if (clicked.className.includes('color') && !clicked.className.includes('selected')) {
+    for (let index = 0; index < colorList.length; index += 1) {
+      colorList[index].classList.remove('selected');
+    }
+    clicked.classList.add('selected');
+  }
+});
 document.addEventListener('click', (e) => {
   const clicked = e.target;
   const selected = document.querySelector('.selected');
@@ -52,7 +54,6 @@ document.addEventListener('click', (e) => {
     }
   }
 });
-
 document.addEventListener('click', (e) => {
   const clicked = e.target;
   const pixels = document.getElementsByClassName('pixel');
@@ -62,6 +63,25 @@ document.addEventListener('click', (e) => {
     }
   }
 });
-createGrid(5);
 
-// repetir a quantidade de colunas para criar as linhas
+// generate new grid
+const input = document.querySelector('#board-size');
+input.onchange = () => {
+  if (input.value > 50) {
+    input.value = 50;
+  }
+  if (input.value < 5) {
+    input.value = 5;
+  }
+};
+document.querySelector('#generate-board').addEventListener('click', () => {
+  if (input.value === '') {
+    alert('Board inválido!"');
+  } else {
+    cleanGrid();
+    createGrid(input.value);
+    // input.value = '';
+  }
+});
+// scripts
+createGrid(5);
