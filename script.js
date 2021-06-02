@@ -24,43 +24,52 @@ function cleanGrid() {
     pixelBoard.removeChild(pixelBoard.firstChild);
   }
 }
-
+function fillStarterColors() {
+  function generateColor() {
+    const randomRGB = [];
+    for (let index = 0; index !== 3; index += 1) {
+      randomRGB.push(Math.floor(Math.random() * 100));
+    }
+    return `rgb(${randomRGB.toString()})`;
+  }
+  const starterColors = document.getElementsByClassName('color');
+  for (let index = 1; index < starterColors.length; index += 1) {
+    starterColors[index].style.backgroundColor = generateColor();
+  }
+}
 // events
-document.addEventListener('click', (e) => {
-  const clicked = e.target;
+document.addEventListener('click', (color) => {
+  const colorClicked = color.target;
   const colorList = document.getElementsByClassName('color');
 
-  if (clicked.className.includes('color') && !clicked.className.includes('selected')) {
+  if (colorClicked.className.includes('color') && !colorClicked.className.includes('selected')) {
     for (let index = 0; index < colorList.length; index += 1) {
       colorList[index].classList.remove('selected');
     }
-    clicked.classList.add('selected');
+    colorClicked.classList.add('selected');
   }
 });
-document.addEventListener('click', (e) => {
-  const clicked = e.target;
+document.addEventListener('click', (pixel) => {
+  const pixelClicked = pixel.target;
   const selected = document.querySelector('.selected');
   const color = window.getComputedStyle(selected, null).getPropertyValue('background-color');
 
-  if (clicked.className.includes('pixel')) {
+  if (pixelClicked.className.includes('pixel')) {
     switch (true) {
-    case clicked.style.backgroundColor !== color:
-      clicked.style.backgroundColor = color;
+    case pixelClicked.style.backgroundColor !== color:
+      pixelClicked.style.backgroundColor = color;
       break;
-    case clicked.style.backgroundColor === color:
-      clicked.style.backgroundColor = 'white';
+    case pixelClicked.style.backgroundColor === color:
+      pixelClicked.style.backgroundColor = 'white';
       break;
     default:
     }
   }
 });
-document.addEventListener('click', (e) => {
-  const clicked = e.target;
+document.querySelector('#clear-board').addEventListener('click', () => {
   const pixels = document.getElementsByClassName('pixel');
-  if (clicked.id === 'clear-board') {
-    for (let index = 0; index < pixels.length; index += 1) {
-      pixels[index].style.backgroundColor = 'white';
-    }
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
   }
 });
 
@@ -85,3 +94,4 @@ document.querySelector('#generate-board').addEventListener('click', () => {
 });
 // scripts
 createGrid(5);
+fillStarterColors();
