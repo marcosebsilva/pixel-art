@@ -76,8 +76,8 @@ document.querySelector('#clear-board').addEventListener('click', () => {
 // generate new grid
 const input = document.querySelector('#board-size');
 input.onchange = () => {
-  if (input.value > 50) {
-    input.value = 50;
+  if (input.value > 30) {
+    input.value = 30;
   }
   if (input.value < 5) {
     input.value = 5;
@@ -89,7 +89,6 @@ document.querySelector('#generate-board').addEventListener('click', () => {
   } else {
     cleanGrid();
     createGrid(input.value);
-    // input.value = '';
   }
 });
 // scripts

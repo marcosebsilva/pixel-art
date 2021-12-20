@@ -1,5 +1,4 @@
-
-.color, .pixel{
+.color , .pixel {
   border: 1px solid black;
   display: inline-block;
   width: 40px;
@@ -16,11 +15,11 @@
   margin: -4px;
 }
 
-#pixel-board{
+#pixel-board {
   position: relative;
-  margin-top:10px;
+  margin-top: 10px;
 }
 
-.tools{
+.tools {
   display: inline-block;
 }
